@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: 'Now: '),
+                    TextSpan(text: 'Input (DateTime.now) : '),
                     TextSpan(text: '${DateTime.now()}', style: TextStyle(fontWeight: FontWeight.bold)),
                   ]
                 ),
@@ -133,6 +133,23 @@ class MyApp extends StatelessWidget {
                             DateTime.parse('2025-01-01'),
                             ThaiDateFormatType.fullMonthFullYear,
                             padDayWithZero: true
+                          ), style: TextStyle(fontWeight: FontWeight.bold)
+                      ),
+                    ]
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Text('Advance' ,style: TextStyle(fontWeight: FontWeight.bold)),
+              RichText(
+                text: TextSpan(
+                    children: [
+                      TextSpan(text: 'Specific date 2025-01-02 (padding and Thai numbers) : '),
+                      TextSpan(
+                          text: ThaiDateFormatter.format(
+                            DateTime.parse('2025-01-02'),
+                            ThaiDateFormatType.fullMonthFullYear,
+                            padDayWithZero: true,
+                            useThaiNumbers: true,
                           ), style: TextStyle(fontWeight: FontWeight.bold)
                       ),
                     ]
