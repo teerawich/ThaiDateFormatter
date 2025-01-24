@@ -1,39 +1,76 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Thai Date Formatter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A Dart package for formatting dates in Thai language and Buddhist calendar with support for Thai numerals.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
 
 ## Features
+- Format `DateTime` objects to Thai date formats with options for:
+    - Full/short month names and years.
+    - Displaying day of the week (short or full).
+    - Padding day numbers with zero.
+    - Using Thai numerals.
+- Support for the Buddhist calendar year system.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Installation
 
-## Getting started
+Add the following line to your `pubspec.yaml` file:
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```yaml
+dependencies:
+  thai_date_formatter: ^1.0.0
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Basic example:
 
 ```dart
-const like = 'sample';
+import 'package:thai_date_formatter/thai_date_formatter.dart';
+
+void main() {
+  final date = DateTime.parse("2025-01-01");
+  final result = ThaiDateFormatter.format(
+      date,
+      ThaiDateFormatType.fullMonthFullYear
+  );
+  
+  print(result); //Output: 1 มกราคม 2568
+}
 ```
 
-## Additional information
+More features:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:thai_date_formatter/thai_date_formatter.dart';
+
+void main() {
+  final dateWithTime = DateTime.parse('2025-01-02 12:00:00');
+  final resultDateWithTime = ThaiDateFormatter.format(
+    dateWithTime,
+    ThaiDateFormatType.shortMonthFullYear,
+    padDayWithZero: true,
+  );
+  
+  print(result); //Output: 02 ม.ค. 2568
+}
+```
+
+Configuration Options
+```markdown
+| Parameter         | Description                                | Default         |
+|-------------------|--------------------------------------------|-----------------|
+| `useThaiNumbers`  | Convert numbers to Thai numerals           | `false`         |
+| `padDayWithZero`  | Add leading zero to day numbers            | `false`         |
+| `showDayOfWeek`   | Include day of the week in the formatted date | `false`         |
+| `shortDayOfWeek`  | Use short names for day of the week        | `false`         |
+```
+
+## Licenses
+
+- BSD 2-Clause License
+
+---
+
+## Issues & Support
+
+If you find any issues or have suggestions, please open an issue on GitHub.
