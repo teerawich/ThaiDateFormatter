@@ -56,14 +56,14 @@ void main() {
 ```
 
 Configuration Options
-```markdown
+
 | Parameter         | Description                                | Default         |
 |-------------------|--------------------------------------------|-----------------|
 | `useThaiNumbers`  | Convert numbers to Thai numerals           | `false`         |
 | `padDayWithZero`  | Add leading zero to day numbers            | `false`         |
 | `showDayOfWeek`   | Include day of the week in the formatted date | `false`         |
 | `shortDayOfWeek`  | Use short names for day of the week        | `false`         |
-```
+
 
 ## Licenses
 
