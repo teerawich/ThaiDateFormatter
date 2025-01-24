@@ -97,15 +97,21 @@ class ThaiDateFormatter {
 
     /// Build the formatted date string
     final String result = switch (formatType) {
-      ThaiDateFormatType.fullMonthFullYear => '$day ${_thaiMonthsFull[month]} $year',
-      ThaiDateFormatType.fullMonthShortYear =>'$day ${_thaiMonthsFull[month]} ${year.toString().substring(2)}',
-      ThaiDateFormatType.shortMonthFullYear => '$day ${_thaiMonthsShort[month]} $year',
-      ThaiDateFormatType.shortMonthShortYear => '$day ${_thaiMonthsShort[month]} ${year.toString().substring(2)}'
+      ThaiDateFormatType.fullMonthFullYear =>
+        '$day ${_thaiMonthsFull[month]} $year',
+      ThaiDateFormatType.fullMonthShortYear =>
+        '$day ${_thaiMonthsFull[month]} ${year.toString().substring(2)}',
+      ThaiDateFormatType.shortMonthFullYear =>
+        '$day ${_thaiMonthsShort[month]} $year',
+      ThaiDateFormatType.shortMonthShortYear =>
+        '$day ${_thaiMonthsShort[month]} ${year.toString().substring(2)}'
     };
 
     /// Add day of week and convert to Thai numbers if needed,
     final String formattedDate = dayOfWeek + result;
-    return useThaiNumbers ? ThaiNumberFormatter.toThaiNumbers(formattedDate) : formattedDate;
+    return useThaiNumbers
+        ? ThaiNumberFormatter.toThaiNumbers(formattedDate)
+        : formattedDate;
   }
 }
 
