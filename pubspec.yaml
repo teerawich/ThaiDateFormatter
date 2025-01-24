@@ -1,7 +1,7 @@
 name: thai_date_formatter
 description: "A Dart library for formatting dates in Thai Buddhist Era with Thai month and day names."
-version: 0.0.1
-homepage:
+version: 1.0.0
+repository: https://github.com/teerawich/ThaiDateFormatter.git
 
 environment:
   sdk: ^3.6.1
