@@ -69,7 +69,6 @@ Configuration Options
 
 - BSD 2-Clause License
 
----
 
 ## Issues & Support
 
