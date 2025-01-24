@@ -1,11 +1,20 @@
+/// Defines Thai date formats with full/short month names and years.
 enum ThaiDateFormatType {
+  /// Full month name with full year (e.g., 01 มกราคม 2568).
   fullMonthFullYear,
+
+  /// Full month name with short year (e.g., 01 มกราคม 68).
   fullMonthShortYear,
+
+  /// Short month name with full year (e.g., 01 ม.ค. 2568).
   shortMonthFullYear,
+
+  /// Short month name with short year (e.g., 01 ม.ค. 68).
   shortMonthShortYear,
 }
 
 class ThaiDateFormatter {
+  /// Thai month full name mapping.
   static const Map<int, String> _thaiMonthsFull = {
     1: 'มกราคม',
     2: 'กุมภาพันธ์',
@@ -21,6 +30,7 @@ class ThaiDateFormatter {
     12: 'ธันวาคม',
   };
 
+  /// Thai month short name mapping.
   static const Map<int, String> _thaiMonthsShort = {
     1: 'ม.ค.',
     2: 'ก.พ.',
@@ -36,6 +46,7 @@ class ThaiDateFormatter {
     12: 'ธ.ค.',
   };
 
+  /// Thai days full name mapping.
   static const Map<int, String> _thaiDaysFull = {
     1: 'จันทร์',
     2: 'อังคาร',
@@ -46,6 +57,7 @@ class ThaiDateFormatter {
     7: 'อาทิตย์',
   };
 
+  /// Thai days short name mapping.
   static const Map<int, String> _thaiDaysShort = {
     1: 'จ.',
     2: 'อ.',
@@ -56,22 +68,26 @@ class ThaiDateFormatter {
     7: 'อา.',
   };
 
+  /// Formats a DateTime object into a Thai date string based on the given format type.
   static String format(
     DateTime date,
     ThaiDateFormatType formatType, {
-    bool useThaiNumbers = false,
-    bool padDayWithZero = false,
-    bool showDayOfWeek = false,
-    bool shortDayOfWeek = false,
+    bool useThaiNumbers = false, // Convert arabic numbers to Thai numerals.
+    bool padDayWithZero = false, // Ensure day is always two digits (e.g., 01).
+    bool showDayOfWeek = false, // Include the day of the week in the output.
+    bool shortDayOfWeek = false, // Use short form for the day of the week.
   }) {
+    /// Format day with optional padding
     final day = padDayWithZero
         ? date.day.toString().padLeft(2, '0')
         : date.day.toString();
+
+    /// Extract date components
     final int month = date.month;
     final int year = date.year + 543;
     final int weekday = date.weekday;
 
-    /// Set day of week
+    /// Determine day of the week (if needed)
     String dayOfWeek = '';
     if (showDayOfWeek) {
       dayOfWeek =
@@ -79,30 +95,19 @@ class ThaiDateFormatter {
       dayOfWeek += ' ';
     }
 
-    String result;
-    switch (formatType) {
-      case ThaiDateFormatType.fullMonthFullYear:
-        result = '$day ${_thaiMonthsFull[month]} $year';
-        break;
-      case ThaiDateFormatType.shortMonthFullYear:
-        result = '$day ${_thaiMonthsShort[month]} $year';
-        break;
-      case ThaiDateFormatType.fullMonthShortYear:
-        result =
-            '$day ${_thaiMonthsFull[month]} ${year.toString().substring(2)}';
-        break;
-      case ThaiDateFormatType.shortMonthShortYear:
-        result =
-            '$day ${_thaiMonthsShort[month]} ${year.toString().substring(2)}';
-        break;
-    }
+    /// Build the formatted date string
+    final String result = switch (formatType) {
+      ThaiDateFormatType.fullMonthFullYear => '$day ${_thaiMonthsFull[month]} $year',
+      ThaiDateFormatType.fullMonthShortYear =>'$day ${_thaiMonthsFull[month]} ${year.toString().substring(2)}',
+      ThaiDateFormatType.shortMonthFullYear => '$day ${_thaiMonthsShort[month]} $year',
+      ThaiDateFormatType.shortMonthShortYear => '$day ${_thaiMonthsShort[month]} ${year.toString().substring(2)}'
+    };
 
-    result = dayOfWeek + result;
-
-    return useThaiNumbers ? ThaiNumberFormatter.toThaiNumbers(result) : result;
+    /// Add day of week and convert to Thai numbers if needed,
+    final String formattedDate = dayOfWeek + result;
+    return useThaiNumbers ? ThaiNumberFormatter.toThaiNumbers(formattedDate) : formattedDate;
   }
 }
-
 
 /// Utility class for converting Arabic numerals to Thai numerals.
 class ThaiNumberFormatter {
@@ -121,17 +126,16 @@ class ThaiNumberFormatter {
 
   /// Converts Arabic numerals in the input string to Thai numerals.
   static String toThaiNumbers(String input) {
-
     /// handle empty input
     if (input.isEmpty) return input;
 
     final buffer = StringBuffer();
-    for (final char in input.runes) {
-      /// char is unicode from input.runes
-      final thaiChar = _thaiNumbers[String.fromCharCode(char)];
+    for (final rune in input.runes) {
+      /// Convert Unicode to a character and map it to Thai numerals if available.
+      final thaiChar = _thaiNumbers[String.fromCharCode(rune)];
 
-      /// if thaiChar cannot mapping return old character.
-      buffer.write(thaiChar ?? String.fromCharCode(char));
+      /// Write the Thai numeral or the original character if no mapping exists.
+      buffer.write(thaiChar ?? String.fromCharCode(rune));
     }
 
     return buffer.toString();
