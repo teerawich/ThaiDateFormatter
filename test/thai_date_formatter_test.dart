@@ -3,14 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:thai_date_formatter/thai_date_formatter.dart';
 
 void main() {
-  group('ThaiDateFormatter',() {
-
-    test('Format full month and full year',() {
+  group('ThaiDateFormatter', () {
+    test('Format full month and full year', () {
       final date = DateTime.parse("2025-01-01");
-      final result = ThaiDateFormatter.format(
-          date,
-          ThaiDateFormatType.fullMonthFullYear
-      );
+      final result =
+          ThaiDateFormatter.format(date, ThaiDateFormatType.fullMonthFullYear);
 
       expect(result, '1 มกราคม 2568');
 
@@ -33,8 +30,10 @@ void main() {
 
       expect(resultDateWithTimeUseThaiFormat, '๐๒ มกราคม ๒๕๖๘');
 
-      final dateWithTimeUseThaiFormatAndWeekday = DateTime.parse('2025-01-02 12:00:00');
-      final resultDateWithTimeUseThaiFormatAndWeekday = ThaiDateFormatter.format(
+      final dateWithTimeUseThaiFormatAndWeekday =
+          DateTime.parse('2025-01-02 12:00:00');
+      final resultDateWithTimeUseThaiFormatAndWeekday =
+          ThaiDateFormatter.format(
         dateWithTimeUseThaiFormatAndWeekday,
         ThaiDateFormatType.fullMonthFullYear,
         useThaiNumbers: true,
@@ -42,10 +41,13 @@ void main() {
         showDayOfWeek: true,
       );
 
-      expect(resultDateWithTimeUseThaiFormatAndWeekday, 'พฤหัสบดี ๐๒ มกราคม ๒๕๖๘');
+      expect(
+          resultDateWithTimeUseThaiFormatAndWeekday, 'พฤหัสบดี ๐๒ มกราคม ๒๕๖๘');
 
-      final dateWithTimeUseThaiFormatAndWeekdayShortFormat = DateTime.parse('2025-01-02 12:00:00');
-      final resultDateWithTimeUseThaiFormatAndWeekdayShortFormat = ThaiDateFormatter.format(
+      final dateWithTimeUseThaiFormatAndWeekdayShortFormat =
+          DateTime.parse('2025-01-02 12:00:00');
+      final resultDateWithTimeUseThaiFormatAndWeekdayShortFormat =
+          ThaiDateFormatter.format(
         dateWithTimeUseThaiFormatAndWeekdayShortFormat,
         ThaiDateFormatType.fullMonthFullYear,
         useThaiNumbers: true,
@@ -54,15 +56,14 @@ void main() {
         shortDayOfWeek: true,
       );
 
-      expect(resultDateWithTimeUseThaiFormatAndWeekdayShortFormat, 'พฤ. ๐๒ มกราคม ๒๕๖๘');
+      expect(resultDateWithTimeUseThaiFormatAndWeekdayShortFormat,
+          'พฤ. ๐๒ มกราคม ๒๕๖๘');
     });
 
     test('Format short month and full year', () {
       final date = DateTime.parse("2025-01-01");
-      final result = ThaiDateFormatter.format(
-          date,
-          ThaiDateFormatType.shortMonthFullYear
-      );
+      final result =
+          ThaiDateFormatter.format(date, ThaiDateFormatType.shortMonthFullYear);
 
       expect(result, '1 ม.ค. 2568');
 
@@ -88,10 +89,8 @@ void main() {
 
     test('Format full month and short year', () {
       final date = DateTime.parse("2025-01-01");
-      final result = ThaiDateFormatter.format(
-          date,
-          ThaiDateFormatType.fullMonthShortYear
-      );
+      final result =
+          ThaiDateFormatter.format(date, ThaiDateFormatType.fullMonthShortYear);
 
       expect(result, '1 มกราคม 68');
 
@@ -118,9 +117,7 @@ void main() {
     test('Format short month and short year', () {
       final date = DateTime.parse("2025-01-01");
       final result = ThaiDateFormatter.format(
-          date,
-          ThaiDateFormatType.shortMonthShortYear
-      );
+          date, ThaiDateFormatType.shortMonthShortYear);
 
       expect(result, '1 ม.ค. 68');
 
@@ -143,7 +140,5 @@ void main() {
 
       expect(resultDateWithTimeUseThaiFormat, '๐๒ ม.ค. ๖๘');
     });
-
   });
-
 }

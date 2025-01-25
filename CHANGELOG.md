@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.1
+**Release Date**: 2025-01-23
+
+### Updated
+- Change code format to dart.
+
+
 ## 1.0.0
 **Release Date**: 2025-01-23
 
